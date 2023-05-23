@@ -1,0 +1,114 @@
+try:
+ inventario = []
+
+ while True:
+     print("=====================| Menú |========================")           
+     print("\n          1. Introducir un artículo")
+     print("          2. Modificar un artículo")
+     print("          3. Eliminar un artículo")
+     print("          4. listado del inventario")
+     print("          5. Inventario de productos agotados")
+     print("          6. Salir del programa")
+     print("\n=====================================================")
+
+     opcion = input("          Seleccione una opción: ")
+     print("\n=====================================================")
+
+     if opcion == "1":
+         codigo = input("          Ingrese el código del artículo: #")
+         descripcion = input("          Ingrese la descripción del artículo: ")
+         costo = float(input("          Ingrese el costo del artículo: $"))
+         precio = float(input("          Ingrese el precio del artículo: $"))
+         existencia = int(input("          Ingrese la existencia del artículo: "))
+         stock_minimo = int(input("          Ingrese el stock mínimo del artículo: "))
+
+         articulo = {
+             'Código': codigo,
+             'Descripción': descripcion,
+             'Costo': costo,
+             'Precio': precio,
+             'Existencia': existencia,
+             'Stock mínimo': stock_minimo
+         }
+
+         inventario.append(articulo)
+         print("          Artículo agregado al inventario.")
+
+     elif opcion == "2":
+         codigo = input(" Ingrese el código del artículo que desea modificar: #")
+         encontrado = False
+
+         for articulo in inventario:
+             if articulo['Código'] == codigo:
+                 descripcion = input("          Ingrese la nueva descripción del artículo: ")
+                 costo = float(input("          Ingrese el nuevo costo del artículo: $"))
+                 precio = float(input("          Ingrese el nuevo precio del artículo: $"))
+                 existencia = int(input("          Ingrese la nueva existencia del artículo: "))
+                 stock_minimo = int(input("          Ingrese el nuevo stock mínimo del artículo: "))
+
+                 articulo['Descripción'] = descripcion
+                 articulo['Costo'] = costo
+                 articulo['Precio'] = precio
+                 articulo['Existencia'] = existencia
+                 articulo['Stock mínimo'] = stock_minimo
+
+                 print("          Artículo modificado.")
+                 encontrado = True
+                 break
+
+         if not encontrado:
+             print(" No se encontró ningún artículo con el código ingresado.")
+
+     elif  opcion == "3":
+         codigo = input("Ingrese el código del artículo que desea eliminar: ")
+         encontrado = False
+
+         for articulo in inventario:
+             if articulo['Código'] == codigo:
+                 inventario.remove(articulo)
+                 print("Artículo eliminado.")
+                 encontrado = True
+                 break
+
+         if not encontrado:
+             print("No se encontró ningún artículo con el código ingresado.")
+
+     elif opcion == "4":
+         if not inventario:
+             print("El inventario está vacío.")
+         else:
+             print("Inventario:")
+             for articulo in inventario:
+                 print("Código:", articulo['Código'])
+                 print("Descripción:", articulo['Descripción'])
+                 print("Costo:", articulo['Costo'])
+                 print("Precio:", articulo['Precio'])
+                 print("Existencia:", articulo['Existencia'])
+                 print("Stock mínimo:", articulo['Stock mínimo'])
+                 print("---------------------------")
+
+     elif opcion == "5":
+         agotados = [articulo for articulo in inventario if articulo['Existencia'] == 0]
+
+         if not agotados:
+             print("No hay productos agotados en el inventario.")
+         else:
+             print("Productos Agotados:")
+             for articulo in agotados:
+                 print("Código:", articulo)
+                 print("Descripción:", articulo['Descripción'])
+                 print("Costo:", articulo['Costo'])
+                 print("Precio:", articulo['Precio'])
+                 print("Existencia:", articulo['Existencia'])
+                 print("Stock mínimo:", articulo['Stock mínimo'])
+                 print("---------------------------")
+
+     elif opcion == "6":
+          print("Programa finalizado.")
+          break
+
+ else:
+   print("Opción inválida. Por favor, seleccione una opción válida.")
+
+except Exception:
+    print("Lo siento no es una respuesta valida")
